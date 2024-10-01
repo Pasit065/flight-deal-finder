@@ -7,7 +7,7 @@ class DataManager:
         self.edited_data_dict = {}
 
     def get_google_sheet_data(self):
-        return requests.get(url = "https://api.sheety.co/97593a8b37701d613736370881bd41fc/flightDeals/prices")
+        return requests.get(url = "https://api.sheety.co/221735387aa47ffc34f79e124d328d66/flightDealsProject/prices")
 
     def set_editing_data_format(self, editing_col, new_data):
         self.edited_data_dict[editing_col] = new_data
@@ -18,8 +18,9 @@ class DataManager:
                 return city_component["code"]
         
     def get_put_body_params(self):
-        body = {}
-        body["price"] = {}
+        body = {
+            "price": {}
+        }
 
         for editing_col in self.edited_data_dict:
             body["price"][editing_col] = self.edited_data_dict[editing_col]

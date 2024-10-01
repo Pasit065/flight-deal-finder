@@ -10,11 +10,13 @@ class FlightData:
         self.endpoint_city_data = {}
         self.every_flight_for_each_city = None
         self.sms_flights_dataframe = None
+        self.all_current_available_flights = []
 
+    def add_new_available_flight_to_all_current_flights(self, new_available_flight):
+        self.all_current_available_flights.append(new_available_flight)
+        
     def set_sms_flights_dataframe_to_empty(self):
-
-        col_list = ["cityFrom", "cityTo", "price", "trip_start_date", "trip_end_date", "time", "date"]
-
+        col_list = ["city_from", "city_to", "price", "trip_start_date", "trip_end_date", "time", "date"]
         empty_dict = {col:[] for col in col_list}
 
         self.sms_flights_dataframe = pandas.DataFrame(empty_dict)
@@ -23,7 +25,8 @@ class FlightData:
         new_row_value = []
 
         for col in flight:
-            new_row_value.append(flight[col])
+            if col != "sms_message":
+                new_row_value.append(flight[col])
 
         self.sms_flights_dataframe.loc[len(self.sms_flights_dataframe)] = new_row_value
 
@@ -43,7 +46,10 @@ class FlightData:
     def set_iata_to_endpoint_city_data(self, iata_code, index):
         self.endpoint_city_data[index]["iataCode"] = iata_code
 
-    def get_available_total_days_trip_flights(self):
+    def get_available_total_days_trip_flights(self, min_days_trip, max_days_trip):
+        if max_days_trip < min_days_trip:
+            raise ValueError("Unavailable input, min_days_trip must lower than max_days_trip.")
+
         available_total_days_trip_flights = []
         
         for flight in self.every_flight_for_each_city:
@@ -52,15 +58,15 @@ class FlightData:
 
             total_trip_days = return_date - outbound_date + dt.timedelta(days = 1)
 
-            if total_trip_days >= dt.timedelta(days = 7) and total_trip_days <= dt.timedelta(days = 28):
+            if total_trip_days >= dt.timedelta(days = min_days_trip) and total_trip_days <= dt.timedelta(days = max_days_trip):
                 new_flight = {}
                 
-                new_flight["cityFrom"] = f'{flight["cityFrom"]}-{self.starting_city_data["iataCode"]}'
-                new_flight["cityTo"] = f'{flight["cityTo"]}-{flight["flyTo"]}'
+                new_flight["city_from"] = f'{flight["cityFrom"]}-{self.starting_city_data["iataCode"]}'
+                new_flight["city_to"] = f'{flight["cityTo"]}-{flight["flyTo"]}'
                 new_flight["price"] = flight["price"]
                 new_flight["trip_start_date"] = dt.datetime.strftime(outbound_date, "%Y-%m-%d")
                 new_flight["trip_end_date"] = dt.datetime.strftime(return_date, "%Y-%m-%d")
-
+                
                 available_total_days_trip_flights.append(new_flight)
 
         return available_total_days_trip_flights

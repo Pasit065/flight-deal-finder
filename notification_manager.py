@@ -7,11 +7,11 @@ class NotificationManager:
     def __init__(self, client):
         self.client = client
         
-    def sending_notification(self, body):
+    def sending_notification(self, body, send_from, send_to):
         message = self.client.messages.create(
-            from_ = '+16187423072',
+            from_ = send_from,
             body = body,
-            to = '+66622359494'
+            to = send_to
         )
 
     def display_notification_status(self, start_city, endpoint_city, is_send_notification):
@@ -21,9 +21,9 @@ class NotificationManager:
             print(f"There are no low price for {start_city} to {endpoint_city} trips.\nSo sms hasn't been send.\n")
 
     def get_notification_message(self, send_sms_flight):
-        return f"""Low price alert! Only ${send_sms_flight['price']} to fly from
-{send_sms_flight['cityFrom']} to {send_sms_flight['cityTo']}, From
-{send_sms_flight['trip_start_date']} to {send_sms_flight['trip_end_date']}."""
+        return f"""Low price alert! Only ${send_sms_flight['price']} 
+to fly from {send_sms_flight['city_from']} to {send_sms_flight['city_to']}, 
+From {send_sms_flight['trip_start_date']} to {send_sms_flight['trip_end_date']}."""
 
     def is_send_notification(self, the_amount_of_available_flights):
         if the_amount_of_available_flights > 0:
