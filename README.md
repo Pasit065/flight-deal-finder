@@ -25,8 +25,6 @@ The project provide two files for store available flight data.
 
 ![](./public/simplified_processes.png)
 
-<br>
-
 ### Flowchart
 
 
@@ -34,28 +32,28 @@ The project provide two files for store available flight data.
 Before executing project, a few setup are required.
 
 ### Initial Setup
-1. Google Sheet Data Setup: Determine the `City` and `Lowest Price` values for arrival cities in Google Sheet. The data is connected to **Sheety API**
+1. **Google Sheet Data Setup**: Determine the `City` and `Lowest Price` values for arrival cities in Google Sheet. The data is connected to **Sheety API**
 
     ![](./public/google_sheet_initial_table_content.png)
     
-2. Install `requirements.txt`: Install the neccessary packages.
+2. **Install `requirements.txt`**: Install the neccessary packages.
 
-    ```bash
+    ```Bash
     pip install -r requirements.txt
     ```
 
-3. Set up `STARTING_POINT_CITY`: In `main.py`, determine `STARTING_POINT_CITY` value. Initially the script is set to `Bangkok`. 
+3. **Set up `STARTING_POINT_CITY`**: In `main.py`, determine `STARTING_POINT_CITY` value. Initially the script is set to `Bangkok`. 
     ```Python
     STARTING_POINT_CITY = "Bangkok"
     ```
 
-4. Twilio Setup: Sign up twilio to obtain `auth_token` and `ACCOUNT_SID`, determine  values to `main.py`. By default theses variables is set to environment variable
+4. **Twilio Setup**: Sign up twilio to obtain `auth_token` and `ACCOUNT_SID`, determine  values to `main.py`. By default theses variables is set to environment variable
     ```Python
     ACCOUNT_SID = os.environ.get('account_sid')
     auth_token = os.environ.get('auth_token') 
     ```
 
-5. Phone numbers: Twilio provides phone numnber for registered users, determine that phone number and user number in `main.py`. By default theses variables is set to environment variable
+5. **Phone numbers**: Twilio provides phone numnber for registered users, determine that phone number and user number in `main.py`. By default theses variables is set to environment variable
     ```Python
     # Get twilio account generated phone number.
     twilio_phone_number = os.environ.get("twilio_phone_number")
@@ -64,7 +62,7 @@ Before executing project, a few setup are required.
     my_phone_number = os.environ.get("my_phone_number")
     ```
 
-6. Kiwi Tequila token: Sign in *Kiwi Partners Flight Search API* to obtain `api_key` and configure it into `kiwi_api_key` in `main.py`. By default `kiwi_api_key` determined as environment variable.
+6. **Kiwi Tequila token**: Sign in *Kiwi Partners Flight Search API* to obtain `api_key` and configure it into `kiwi_api_key` in `main.py`. By default `kiwi_api_key` determined as environment variable.
     ```Python
     # Get kiwi api key
     kiwi_api_key = os.environ.get("kiwi_api_key")
@@ -72,6 +70,6 @@ Before executing project, a few setup are required.
 
 ### Execute Project
 Once the **Initial Setup** is provided , user can start execute package by
-```
+```Bash
 python main.py
 ```
