@@ -36,24 +36,24 @@ Before executing project, a few setup are required.
 
     ![](./public/google_sheet_initial_table_content.png)
     
-2. **Install `requirements.txt`**: Install the neccessary packages.
+2. **Install `requirements.txt`** for neccessary packages.
 
     ```Bash
     pip install -r requirements.txt
     ```
 
-3. **Set up `STARTING_POINT_CITY`**: In `main.py`, determine `STARTING_POINT_CITY` value. Initially the script is set to `Bangkok`. 
+3. **Set up `STARTING_POINT_CITY`** in `main.py`
     ```Python
     STARTING_POINT_CITY = "Bangkok"
     ```
 
-4. **Twilio Setup**: Sign up twilio to obtain `auth_token` and `ACCOUNT_SID`, determine  values to `main.py`. By default theses variables is set to environment variable
+4. **Twilio Setup**: Sign up twilio to obtain `auth_token` and `ACCOUNT_SID`, determine values to `main.py`. as environment variable
     ```Python
     ACCOUNT_SID = os.environ.get('account_sid')
     auth_token = os.environ.get('auth_token') 
     ```
 
-5. **Phone numbers**: Twilio provides phone numnber for registered users, determine that phone number and user number in `main.py`. By default theses variables is set to environment variable
+    Twilio provides phone numnber for registered users, determine that phone number and user number in `main.py` as environment variable
     ```Python
     # Get twilio account generated phone number.
     twilio_phone_number = os.environ.get("twilio_phone_number")
@@ -66,6 +66,31 @@ Before executing project, a few setup are required.
     ```Python
     # Get kiwi api key
     kiwi_api_key = os.environ.get("kiwi_api_key")
+    ```
+
+### Custom Setup
+There are some variables that is flexible to adjust for user's purpose, the list is shown as following. 
+
+1. `City` and `Lowest Price` column in Google Sheet can be changed or inserted by new row. 
+
+    Please note that `IATA code` is not required, the project script can provide this column.
+
+2. `STARTING_POINT_CITY` in `main.py` is flexible, user can change to desired city.
+    ```Python
+    STARTING_POINT_CITY = "Kyoto"
+    ```
+
+3. `my_phone_number` and `my_email` in environment variables can be adjusted but please bear in mind, `my_phone_number` value must be a phone number that verified by Twilio.
+
+4. `date_from` and `date_to` values can be modifed for change to different intervals of searched trips
+    ```Python
+    date_from = (now + dt.timedelta(days = 1)).date()
+    date_to = (date_from + pandas.DateOffset(months = 10)).date()
+    ```
+
+5.  In `min_days_trip` and `max_days_trip` can be adjusted, users can change total min and max trip days as desired.
+    ```Python
+    available_total_days_trip_flights = flight_data.get_available_total_days_trip_flights(min_days_trip = 9, max_days_trip = 15)
     ```
 
 ### Execute Project
