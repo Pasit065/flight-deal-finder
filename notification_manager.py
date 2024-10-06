@@ -1,4 +1,3 @@
-
 import random
 
 class NotificationManager:
@@ -30,8 +29,8 @@ From {send_sms_flight['trip_start_date']} to {send_sms_flight['trip_end_date']}.
             return True
         else:
             return False
-
-    def get_randomaly_notification_flight(self,available_flight_list):
+        
+    def get_randomaly_notification_flight(self, available_flight_list):
         # get_random_notification_flight
         return random.choice(available_flight_list)
 

@@ -88,11 +88,15 @@ There are some variables that is flexible to adjust for user's purpose, the list
     date_to = (date_from + pandas.DateOffset(months = 10)).date()
     ```
 
-5.  In `min_days_trip` and `max_days_trip` can be adjusted, users can change total min and max trip days as desired.
+5.  In `min_days_trip` and `max_days_trip` can be adjusted, users can customize total min and max trip days as desired.
     ```Python
     available_total_days_trip_flights = flight_data.get_available_total_days_trip_flights(min_days_trip = 9, max_days_trip = 15)
     ```
 
+6. In every `connection.sendmail()` function, `to_addrs` parameter can be adjuted which is recieved email when exception is occur.
+    ```Python
+    connection.sendmail(from_addr = my_email, to_addrs = "<recieved_email>", msg = f"Subject:Api search are failed.\nplease check your code or calling to address {my_email}.")
+    ```
 ### Execute Project
 Once the **Initial Setup** is provided , user can start execute package by
 ```Bash
