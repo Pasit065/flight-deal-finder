@@ -36,10 +36,6 @@ my_phone_number = os.environ.get("my_phone_number")
 my_email = os.environ.get('my_email')
 smtp_pass = os.environ.get('smtp_pass')
 
-# Determine PostgreSQL user and password.
-postgresql_user = os.environ.get("PostgreSQL_user")
-postgresql_pass = os.environ.get("PostgreSQL_pass")
-
 # Determine every object.
 flight_search = FlightSearch()
 flight_data = FlightData()
@@ -150,7 +146,7 @@ date_to = (date_from + pandas.DateOffset(months = 6)).date()
 for endpoint_city in flight_data.endpoint_city_data:
     # Set body parameter.
     params = {
-        "fly_from": "BKK",
+        "fly_from": flight_data.starting_city_data["iataCode"],
         "fly_to": endpoint_city["iataCode"],
         "date_from": dt.datetime.strftime(date_from, "%d/%m/%Y"),
         "date_to": dt.datetime.strftime(date_to, "%d/%m/%Y"),
