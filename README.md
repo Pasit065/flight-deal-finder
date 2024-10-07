@@ -27,6 +27,7 @@ The project provide two files for store available flight data.
 
 ### Flowchart
 
+![](./public/flight-deals-search-flowchart.png)
 
 ## Usage
 Before executing project, a few setup are required.
