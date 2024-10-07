@@ -36,10 +36,6 @@ my_phone_number = os.environ.get("my_phone_number")
 my_email = os.environ.get('my_email')
 smtp_pass = os.environ.get('smtp_pass')
 
-# Determine PostgreSQL user and password.
-postgresql_user = os.environ.get("PostgreSQL_user")
-postgresql_pass = os.environ.get("PostgreSQL_pass")
-
 # Determine every object.
 flight_search = FlightSearch()
 flight_data = FlightData()
