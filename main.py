@@ -146,7 +146,7 @@ date_to = (date_from + pandas.DateOffset(months = 6)).date()
 for endpoint_city in flight_data.endpoint_city_data:
     # Set body parameter.
     params = {
-        "fly_from": "BKK",
+        "fly_from": flight_data.starting_city_data["iataCode"],
         "fly_to": endpoint_city["iataCode"],
         "date_from": dt.datetime.strftime(date_from, "%d/%m/%Y"),
         "date_to": dt.datetime.strftime(date_to, "%d/%m/%Y"),
